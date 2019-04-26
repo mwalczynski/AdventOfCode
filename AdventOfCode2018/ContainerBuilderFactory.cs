@@ -1,9 +1,6 @@
-﻿using System;
-
-namespace AdventOfCode2018
+﻿namespace AdventOfCode2018
 {
     using System.Reflection;
-    using System.Text.RegularExpressions;
     using Autofac;
     using Day;
     using Readers;
@@ -17,8 +14,8 @@ namespace AdventOfCode2018
             containerBuilder.RegisterType<InputReader>().As<IInputReader>();
 
             containerBuilder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                .Where(t => Regex.IsMatch(t.Name, "Day\\d+Task[12]"))
-                .As<IDay>();
+                .Where(t => Regexes.TaskRegex.IsMatch(t.Name))
+                .Named<IDay>(t => string.Join(";", Regexes.NumbersRegex.Matches(t.Name)));
 
             var container = containerBuilder.Build();
             return container;

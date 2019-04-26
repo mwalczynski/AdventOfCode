@@ -1,21 +1,18 @@
 ﻿namespace AdventOfCode2018.Day
 {
     using System.Linq;
-    using System.Text.RegularExpressions;
     using Readers;
 
     public abstract class BaseDay : IDay
     {
         private readonly IInputReader _reader;
 
-        private readonly Regex _numbersRegex = new Regex(@"\d+");
-
         protected BaseDay(IInputReader reader)
         {
             _reader = reader;
         }
 
-        public int DayNumber
+        protected int DayNumber
         {
             get
             {
@@ -25,7 +22,7 @@
             }
         }
 
-        public int TaskNumber
+        protected int TaskNumber
         {
             get
             {
@@ -35,7 +32,7 @@
             }
         }
 
-        public string[] GetInput(bool isTaskNumberNecessary = false)
+        protected string[] GetCurrentTaskInput(bool isTaskNumberNecessary = false)
         {
             var data = isTaskNumberNecessary ?
                 _reader.GetInput(DayNumber, TaskNumber) :
@@ -49,7 +46,7 @@
         {
             var className = GetType().Name;
 
-            var numbers = _numbersRegex.Matches(className)
+            var numbers = Regexes.NumbersRegex.Matches(className)
                 .Select(m => int.Parse(m.Value))
                 .ToArray();
 

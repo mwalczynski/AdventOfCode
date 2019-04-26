@@ -1,28 +1,26 @@
 ﻿namespace AdventOfCode2018
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using Autofac;
+    using Autofac.Features.Indexed;
     using Day;
-    using Microsoft.Extensions.DependencyInjection;
 
     class Program
     {
         private static readonly IContainer Resolver = ContainerBuilderFactory.Build();
-        private static readonly IEnumerable<IDay> Days = Resolver.Resolve<IEnumerable<IDay>>();
+        private static readonly IIndex<string, IDay> Tasks = Resolver.Resolve<IIndex<string, IDay>>();
 
         static void Main()
         {
-            var (dayNumber, taskNumber) = GetDay();
-            var day = Days.Single(d => d.DayNumber == dayNumber && d.TaskNumber == taskNumber);
+            var (dayNumber, taskNumber) = AskForTask();
+            var taskIdentifier = $"{dayNumber};{taskNumber}";
+            var day = Tasks[taskIdentifier];
 
             var result = day.GetResult();
-            Console.WriteLine($"Result for day {dayNumber}: {result}");
+            Console.WriteLine($"Result for day {dayNumber} and task {taskNumber}: {result}");
         }
 
-        private static (int, int) GetDay()
+        private static (int, int) AskForTask()
         {
             Console.Write("Find result for day: ");
             var day = Console.ReadLine();

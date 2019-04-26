@@ -13,7 +13,7 @@
 
         public override string GetResult()
         {
-            var input = GetInput();
+            var input = GetCurrentTaskInput();
             var data = input
                 .ToArray();
 

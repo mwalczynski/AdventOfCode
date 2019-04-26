@@ -13,7 +13,7 @@
 
         public override string GetResult()
         {
-            var input = GetInput();
+            var input = GetCurrentTaskInput();
             var data = input.Single();
 
             var chars = Enumerable.Range('a', 'z' - 'a' + 1).Select(i => (char)i).ToArray();

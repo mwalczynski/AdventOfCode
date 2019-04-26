@@ -24,7 +24,7 @@
 
         public override string GetResult()
         {
-            var input = GetInput();
+            var input = GetCurrentTaskInput();
             var data = input.Select(i => Regex.Split(i, @"\D+")
                 .Where(x => !string.IsNullOrWhiteSpace(x))
                 .Select(x => int.Parse(x)));

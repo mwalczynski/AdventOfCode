@@ -12,7 +12,7 @@
 
         public override string GetResult()
         {
-            var input = GetInput();
+            var input = GetCurrentTaskInput();
             var numbers = input.Select(s => int.Parse(s));
             var result = numbers.Sum();
             return result.ToString();

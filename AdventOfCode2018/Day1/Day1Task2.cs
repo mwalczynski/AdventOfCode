@@ -13,7 +13,7 @@
 
         public override string GetResult()
         {
-            var input = GetInput();
+            var input = GetCurrentTaskInput();
             var numbers = input.Select(s => int.Parse(s)).ToArray();
 
             var reachedFrequencies = new HashSet<int>();

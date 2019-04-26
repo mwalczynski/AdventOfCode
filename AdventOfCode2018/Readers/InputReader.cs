@@ -5,7 +5,6 @@
     public class InputReader : IInputReader
     {
         private const string _sameInputsPath = "..//..//..//..//Inputs//{0}.txt";
-
         private const string _otherInputsPath = "..//..//..//..//Inputs//{0}_{1}.txt";
 
         public string GetInput(int day)
@@ -32,6 +31,19 @@
                     return data;
                 }
             }
+        }
+    }
+
+    public class SecondReader : IInputReader
+    {
+        public string GetInput(int day)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string GetInput(int day, int task)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

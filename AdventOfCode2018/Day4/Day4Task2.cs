@@ -18,7 +18,7 @@
 
         public override string GetResult()
         {
-            var input = GetInput();
+            var input = GetCurrentTaskInput();
             var messages = input
                 .Select(x => ParseInput(x))
                 .OrderBy(x => x.Timestamp);
