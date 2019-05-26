@@ -3,28 +3,16 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using Day;
-    using Readers;
+    using AdventOfCode.Common;
 
     public class Day3Task2 : BaseDay
     {
-        private readonly List<int>[,] _fabric;
+        private List<int>[,] _fabric;
 
-        public Day3Task2(IInputReader reader) : base(reader)
+        public override string GetResult(string[] input)
         {
-            _fabric = new List<int>[1000, 1000];
-            for (var i = 0; i < _fabric.GetLength(0); i++)
-            {
-                for (var j = 0; j < _fabric.GetLength(1); j++)
-                {
-                    _fabric[i, j] = new List<int>();
-                }
-            }
-        }
+            InitializeFabric();
 
-        public override string GetResult()
-        {
-            var input = GetCurrentTaskInput();
             var data = input.Select(i => Regex.Split(i, @"\D+")
                 .Where(x => !string.IsNullOrWhiteSpace(x))
                 .Select(x => int.Parse(x)));
@@ -58,6 +46,18 @@
             }
 
             return "Something went wrong";
+        }
+
+        private void InitializeFabric()
+        {
+            _fabric = new List<int>[1000, 1000];
+            for (var i = 0; i < _fabric.GetLength(0); i++)
+            {
+                for (var j = 0; j < _fabric.GetLength(1); j++)
+                {
+                    _fabric[i, j] = new List<int>();
+                }
+            }
         }
     }
 }

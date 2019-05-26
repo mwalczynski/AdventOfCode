@@ -2,18 +2,12 @@
 {
     using System;
     using System.Linq;
-    using Day;
-    using Readers;
+    using AdventOfCode.Common;
 
     public class Day5Task1 : BaseDay
     {
-        public Day5Task1(IInputReader reader) : base(reader)
+        public override string GetResult(string[] input)
         {
-        }
-
-        public override string GetResult()
-        {
-            var input = GetCurrentTaskInput();
             var data = input.Single();
 
             var index = 0;

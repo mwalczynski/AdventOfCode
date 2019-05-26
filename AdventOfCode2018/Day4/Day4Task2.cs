@@ -4,21 +4,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using Day;
-    using Readers;
+    using AdventOfCode.Common;
 
     public class Day4Task2 : BaseDay
     {
         private const string _wakeUpInfo = "wakes up";
         private const string _fallsAsleepInfo = "falls asleep";
 
-        public Day4Task2(IInputReader reader) : base(reader)
+        public override string GetResult(string[] input)
         {
-        }
-
-        public override string GetResult()
-        {
-            var input = GetCurrentTaskInput();
             var messages = input
                 .Select(x => ParseInput(x))
                 .OrderBy(x => x.Timestamp);
@@ -30,7 +24,7 @@
 
             foreach (var message in messages)
             {
-                var numbers = Regex.Matches(message.Information, @"\d+").Select(x => int.Parse(x.Value)).ToArray();
+                var numbers = Regex.Matches(message.Information, @"\d+").Cast<Match>().Select(m => int.Parse(m.Value)).ToArray();
                 if (numbers.Any())
                 {
                     currentGuardId = numbers.Single();

@@ -2,18 +2,12 @@
 {
     using System;
     using System.Linq;
-    using Day;
-    using Readers;
+    using AdventOfCode.Common;
 
     public class Day5Task2 : BaseDay
     {
-        public Day5Task2(IInputReader reader) : base(reader)
+        public override string GetResult(string[] input)
         {
-        }
-
-        public override string GetResult()
-        {
-            var input = GetCurrentTaskInput();
             var data = input.Single();
 
             var chars = Enumerable.Range('a', 'z' - 'a' + 1).Select(i => (char)i).ToArray();
@@ -22,8 +16,8 @@
                 .Aggregate((l, c) =>
                     ProducePolymer(data, l).Length >
                     ProducePolymer(data, c).Length
-                ? c
-                : l);
+                        ? c
+                        : l);
 
             var fullyReactedPolymer = ProducePolymer(data, charToRemove);
             var result = fullyReactedPolymer.Length;

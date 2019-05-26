@@ -1,23 +1,21 @@
-﻿namespace AdventOfCode2018
+﻿using System;
+
+namespace AdventOfCode
 {
-    using System;
     using Autofac;
-    using Autofac.Features.Indexed;
-    using Day;
 
     class Program
     {
         private static readonly IContainer Resolver = ContainerBuilderFactory.Build();
-        private static readonly IIndex<string, IDay> Tasks = Resolver.Resolve<IIndex<string, IDay>>();
 
         static void Main()
         {
             var (dayNumber, taskNumber) = AskForTask();
-            var taskIdentifier = $"{dayNumber};{taskNumber}";
-            var day = Tasks[taskIdentifier];
 
-            var result = day.GetResult();
-            Console.WriteLine($"Result for day {dayNumber} and task {taskNumber}: {result}");
+            var dayManager = Resolver.Resolve<IDaysManager>();
+            var result = dayManager.GetResult(dayNumber, taskNumber);
+
+            Console.WriteLine($"({dayManager.GetYear()})Result for day {dayNumber} and task {taskNumber}: {result}");
         }
 
         private static (int, int) AskForTask()

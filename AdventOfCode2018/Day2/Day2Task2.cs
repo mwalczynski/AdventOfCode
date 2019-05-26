@@ -1,23 +1,12 @@
 ﻿namespace AdventOfCode2018.Day2
 {
-    using System.Linq;
-    using System.Text;
-    using Day;
-    using Readers;
+    using AdventOfCode.Common;
 
     public class Day2Task2 : BaseDay
     {
-        public Day2Task2(IInputReader reader) : base(reader)
+        public override string GetResult(string[] input)
         {
-        }
-
-        public override string GetResult()
-        {
-            var input = GetCurrentTaskInput();
-            var data = input
-                .ToArray();
-
-            var length = data.Length;
+            var length = input.Length;
 
             for (int i = 0; i < length; i++)
             {
@@ -28,10 +17,10 @@
                         continue;
                     }
 
-                    var (differByOneCharacter, differentCharacterIndex) = DifferByOnlyOneCharacter(data[i], data[j]);
+                    var (differByOneCharacter, differentCharacterIndex) = DifferByOnlyOneCharacter(input[i], input[j]);
                     if (differByOneCharacter)
                     {
-                        var result = data[i].Remove(differentCharacterIndex.Value, 1);
+                        var result = input[i].Remove(differentCharacterIndex.Value, 1);
                         return result;
                     }
                 }
@@ -40,7 +29,7 @@
             return "Something went wrong";
         }
 
-        public (bool, int?) DifferByOnlyOneCharacter(string first, string second)
+        private (bool, int?) DifferByOnlyOneCharacter(string first, string second)
         {
             int? differentCharacterIndex = null;
 

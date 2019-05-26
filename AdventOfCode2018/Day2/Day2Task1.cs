@@ -1,27 +1,16 @@
 ﻿namespace AdventOfCode2018.Day2
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Net.Http.Headers;
-    using Day;
-    using Readers;
+    using AdventOfCode.Common;
 
     public class Day2Task1 : BaseDay
     {
-        public Day2Task1(IInputReader reader) : base(reader)
+        public override string GetResult(string[] input)
         {
-        }
-
-        public override string GetResult()
-        {
-            var input = GetCurrentTaskInput();
-            var data = input;
-
             var twos = 0;
             var threes = 0;
 
-            foreach (var s in data)
+            foreach (var s in input)
             {
                 var letters = s.ToCharArray()
                     .GroupBy(x => x)

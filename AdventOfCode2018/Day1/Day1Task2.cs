@@ -2,18 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Day;
-    using Readers;
+    using AdventOfCode.Common;
 
     public class Day1Task2 : BaseDay
     {
-        public Day1Task2(IInputReader reader) : base(reader)
+        public override string GetResult(string[] input)
         {
-        }
-
-        public override string GetResult()
-        {
-            var input = GetCurrentTaskInput();
             var numbers = input.Select(s => int.Parse(s)).ToArray();
 
             var reachedFrequencies = new HashSet<int>();

@@ -2,20 +2,14 @@
 {
     using System.Linq;
     using System.Text.RegularExpressions;
-    using Day;
-    using Readers;
+    using AdventOfCode.Common;
 
     public class Day3Task1 : BaseDay
     {
         private readonly int[,] _fabric = new int[1000, 1000];
 
-        public Day3Task1(IInputReader reader) : base(reader)
+        public override string GetResult(string[] input)
         {
-        }
-
-        public override string GetResult()
-        {
-            var input = GetCurrentTaskInput();
             var data = input.Select(i => Regex.Split(i, @"\D+")
                 .Where(x => !string.IsNullOrWhiteSpace(x))
                 .Select(x => int.Parse(x)));
