@@ -15,7 +15,7 @@ namespace AdventOfCode
             var dayManager = Resolver.Resolve<IDaysManager>();
             var result = dayManager.GetResult(dayNumber, taskNumber);
 
-            Console.WriteLine($"({dayManager.GetYear()})Result for day {dayNumber} and task {taskNumber}: {result}");
+            Console.WriteLine($"(Result for day {dayNumber} and task {taskNumber}: {result}");
         }
 
         private static (int, int) AskForTask()
