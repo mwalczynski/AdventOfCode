@@ -4,8 +4,8 @@
 
     public class InputReader : IInputReader
     {
-        private const string _sameInputsPath = "..//..//..//..//AdventOfCode{0}//Inputs//{1}.txt";
-        private const string _otherInputsPath = "..//..//..//..//AdventOfCode{0}//Inputs//{1}_{2}.txt";
+        private const string _sameInputsPath = "..//..//..//..//AdventOfCode{0}//Inputs//{1:00}.txt";
+        private const string _otherInputsPath = "..//..//..//..//AdventOfCode{0}//Inputs//{1:00}_{2}.txt";
 
         public string GetInput(int year, int day)
         {
