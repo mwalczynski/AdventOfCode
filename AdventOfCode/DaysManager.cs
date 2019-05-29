@@ -20,17 +20,12 @@
 
         public string GetResult(int dayNumber, int taskNumber)
         {
-            var taskIdentifier = $"{_year};{dayNumber};{taskNumber}";
+            var taskIdentifier = $"{dayNumber};{taskNumber}";
             var day = _tasks[taskIdentifier];
             var isTaskNumberNecessary = day.IsTaskNumberNecessary;
             var input = GetTaskInput(_year, dayNumber, taskNumber, isTaskNumberNecessary);
             var result = day.GetResult(input);
             return result;
-        }
-
-        public int GetYear()
-        {
-            return _year;
         }
 
         private string[] GetTaskInput(int year, int dayNumber, int taskNumber, bool isTaskNumberNecessary)
