@@ -1,8 +1,8 @@
 ﻿namespace AdventOfCode
 {
-    class Config
+    public class Config
     {
-        public const string YearConfigKey = "year";
+        public const string YearConfigKey = "Year";
         public const int Year = 2018;
     }
 }

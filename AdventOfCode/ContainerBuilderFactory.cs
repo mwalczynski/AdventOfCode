@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Text.RegularExpressions;
@@ -14,41 +15,26 @@
         {
             var containerBuilder = new ContainerBuilder();
 
-            var assemblies = GetAssemblies().ToArray();
+            var assemblies = GetAdventOfCodeAssemblies();
             containerBuilder.RegisterAssemblyModules<Module>(assemblies);
 
             var container = containerBuilder.Build();
             return container;
         }
 
-        public static IEnumerable<Assembly> GetAssemblies()
+        private static Assembly[] GetAdventOfCodeAssemblies()
         {
-            var hashSet = new HashSet<string>();
-            var stack = new Stack<Assembly>();
+            var entryAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
+            var regex = new Regex($@"{entryAssemblyName}\d*$");
 
-            var entryAssembly = Assembly.GetEntryAssembly();
-            var entryAssemblyName = entryAssembly.GetName().Name;
-            stack.Push(entryAssembly);
+            var files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll");
 
-            var regex = new Regex($"{entryAssemblyName}\\d+");
+            var assemblies = files
+                .Select(file => Assembly.LoadFrom(file))
+                .Where(assembly => regex.IsMatch(assembly.GetName().Name))
+                .ToArray();
 
-            do
-            {
-                var assembly = stack.Pop();
-
-                yield return assembly;
-
-                foreach (var referencedAssembly in asse())
-                {
-                    if (!regex.IsMatch(referencedAssembly.Name)) continue;
-                    if (hashSet.Contains(referencedAssembly.FullName)) continue;
-
-                    stack.Push(Assembly.Load(referencedAssembly));
-                    hashSet.Add(referencedAssembly.FullName);
-                }
-
-            }
-            while (stack.Count > 0);
+            return assemblies;
         }
     }
 }

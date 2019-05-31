@@ -8,10 +8,11 @@
     {
         protected override void Load(ContainerBuilder builder)
         {
+            var year = Assembly.GetAssembly(this.GetType()).GetName().Name.GetStringNumbers()[0];
+
             builder.RegisterAssemblyTypes(Assembly.GetAssembly(this.GetType()))
-                .Where(t => Regexes.TaskRegex.IsMatch(t.Name))
-                .Named<BaseDay>(t => string.Join(";", ClassIndexProvider.GetStringNumbers(t.Name)))
-                .Keyed<BaseDay>(t => ClassIndexProvider.GetStringNumbers(t.Assembly.GetName().Name)[0]);
+                .AssignableTo<BaseDay>()
+                .Named<BaseDay>(t => $"{year};{string.Join(";", t.Name.GetStringNumbers())}");
         }
     }
 }

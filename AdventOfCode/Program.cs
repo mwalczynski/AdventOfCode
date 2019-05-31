@@ -3,6 +3,7 @@
 namespace AdventOfCode
 {
     using Autofac;
+    using DaysManager;
 
     class Program
     {
