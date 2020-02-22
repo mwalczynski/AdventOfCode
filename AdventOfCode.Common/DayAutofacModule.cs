@@ -1,5 +1,6 @@
 ﻿namespace AdventOfCode.Common
 {
+    using System;
     using System.Reflection;
     using Autofac;
     using Module = Autofac.Module;
